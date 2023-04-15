@@ -73,12 +73,13 @@
     function fetch_ads() {
         global $pdo;
     
-        // Fetch ads from the database
-        $stmt = $pdo->query("SELECT * FROM ads ORDER BY created_at DESC");
+        // Fetch ads and users' names from the database
+        $stmt = $pdo->query("SELECT ads.*, users.username FROM ads JOIN users ON ads.user_id = users.id ORDER BY created_at DESC");
         $ads = $stmt->fetchAll();
     
         return $ads;
     }
+    
     
     
 
