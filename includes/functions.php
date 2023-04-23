@@ -79,6 +79,26 @@
     
         return $ads;
     }
+
+    function create_ad($title, $description, $user_id) {
+        global $pdo;
+    
+        // Prepare an SQL statement to insert the ad data into the database
+        $stmt = $pdo->prepare("INSERT INTO ads (title, description, user_id) VALUES (:title, :description, :user_id)");
+    
+        // Bind the ad data to the SQL statement
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':user_id', $user_id);
+    
+        // Execute the SQL statement and return the new ad's ID if successful
+        if ($stmt->execute()) {
+            return $pdo->lastInsertId();
+        } else {
+            return false;
+        }
+    }
+    
     
     
     
